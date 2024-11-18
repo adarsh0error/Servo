@@ -1,23 +1,23 @@
-#include <Servo.h>
+#include <Servo.h>  // servo library
 Servo s1;
 Servo s2;
 
 void setup()
 {
   Serial.begin(9600);
-  s1.attach(3);
+  s1.attach(3);     // servo pins
   s2.attach(5);
-  s1.write(180);
-  s2.write(0);
+  s1.write(180);    // initial angle for 1st servo based on the setup of the mechanism
+  s2.write(0);       // initial angle for 2nd servo based on the setup of the mechanism
 
 }
 
 void loop()
 {
-  if (Serial.available() > 0) {  
+  if (Serial.available() > 0) {           // check if any input is available in serial monitor
     String input = Serial.readString(); 
 
-    if (input == "STOP"){
+    if (input == "STOP"){                 // if user enters stop servos stop at an angle of 50 degrees
       s1.write(50);
       s2.write(50);
       Serial.println("Servo stopped");
@@ -26,8 +26,8 @@ void loop()
       Serial.println("Angle: ");
       Serial.println(angle);
       for (int i=0; i<=angle; i++){
-        s1.write(180-i);
-        s2.write(i);
+        s1.write(180-i);               // setting angle for the 1st servo based on the user input
+        s2.write(i);                   // setting angle for the 2nd servo based on the user input
         delay(50);
       }
     }
